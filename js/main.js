@@ -1,6 +1,6 @@
 const Items = [
 {id:1,name:'Notebook', img:"img/1.jpg", price:2400},
-{id:2,name:'Mouse', img:"img/2.jpg", price:20},
+{id:2,name:'Mouse', img:"img/2.jpg", price:40},
 {id:3,name:'Keyboard', img:"img/3.jpg", price:230},
 {id:4,name:'Gamepad', img:"img/4.jpg", price:70}
 ];
