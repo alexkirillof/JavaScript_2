@@ -40,11 +40,10 @@ border-radius: 5px;
 
 }
 .products{
-    margin: 0 auto;
     height: 300px;
     display: flex;
     justify-content: space-between;
-    margin: 0 26px;
+    margin: 0 26px 40px 26px;
     
 }
 
@@ -74,4 +73,19 @@ img{
     border-radius: 3px;
     padding:5px 10px ;
     background-color:rgb(204, 204, 204);
+}
+
+.products-summ{
+    display: flex;
+    justify-content: right;
+    margin-right: 26px;
+}
+
+.products-summ span{
+    background-color: rgb(204, 204, 204);
+    border:0;
+    border-radius: 3px;
+    padding:5px 10px ;
+    font-weight: bold;
+
 }
