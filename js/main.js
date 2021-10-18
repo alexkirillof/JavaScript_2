@@ -1,26 +1,75 @@
-const Items = [
-{id:1,name:'Notebook', img:"img/1.jpg", price:2400},
-{id:2,name:'Mouse', img:"img/2.jpg", price:40},
-{id:3,name:'Keyboard', img:"img/3.jpg", price:230},
-{id:4,name:'Gamepad', img:"img/4.jpg", price:70}
+const GOODS = [
+    {title:'Notebook', img:"img/1.jpg", price:2400},
+    {title:'Mouse', img:'img/2.jpg', price:40},
+    {title:'Keyboard', img:'img/3.jpg', price:230},
+    {title:'Gamepad', img:'img/4.jpg', price:70},
 ];
 
-const part = item => {
-   return `
-        <div class="product-item">
-        <h3>${item.name}</h3>
-        <img src="${item.img}">
-        <p>${item.price}</p>
-        <button class="buy-btn">Купить</button>
-    </div> 
-    `
-};
+const CORE_API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses',
+      GET_GOODS_URL = '/catalogData.json',
+      GET_BASKET_GOODS_URL='/getBasket.json';
 
-const render = list => {
-    const productList = list.map(item=>part(item)).join('');
-    document.querySelector('.products').innerHTML = productList;
-}
+const service = (method,postfix) =>(
+    new Promise((resolve) => {
+      const xhr = new XMLHttpRequest(); 
+      xhr.open(method, `${CORE_API_URL}${postfix}`,true);
+      xhr.send();
+      xhr.onload = (event) => {
+          resolve(JSON.parse(event.target.response));
+        }
+    })
+ );
 
-render(Items);
+ Vue.component('basket-goods-item',{
+    props:['item'],
+    template:`
+    <div class="basket-goods-item">  
+     <div>{{item.title}}</div>
+     <img src=item.img alt={{item.img}}>
+     <div>{{item.price}}</div>
+    </div>`,
+})
+
+Vue.component('basket-card',{
+    template:`
+    <div class="basket-card">  
+    
+    </div>`,
+})
+
+
+Vue.component('goods-item',{
+    props:['item'],
+    template:`
+    <div class="goods-item">  
+     <div>{{item.title}}</div>
+     <div><img src="" alt=""></div>
+     <div>{{item.price}}</div>
+    
+    </div>`,
+})
+
+const app = new Vue({
+ el:'#app',
+ data:{
+     goods:GOODS,
+     filteredGoods:GOODS,
+     basketCardVision:false,
+     search:'',
+ },
+  methods: {
+      filterGoods: function(event){
+        this.filteredGoods = this.goods.filter(({title})=>{return new RegExp(this.search, 'i').test(title)})
+      }
+  }
+})
+
+
+
+
+
+
+
+
 
 
