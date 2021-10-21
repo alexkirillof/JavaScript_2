@@ -12,21 +12,37 @@
 </head>
 <body>
     <div id ="app"> 
-        <basket-card v-if="basketCardVision"></basket-card>
+        <basket-card v-if="basketCardVision" text-header="New Header">
+            <close-button @close='closeCart'></close-button>
+            <template v-slot:header>
+                <div>КОРЗИНА</div>
+            </template>
+            <template v-slot:footer>
+                <div>FOOTER</div>
+            </template>
+            
+            <basket-goods-item v-for="item in goods" :item="item"></basket-goods-item>
+        </basket-card>
         <div class="header">
-            <div>shop</div>
+            <div @click='classes'>Computer shop</div>
+            
                 <div class="right-container">
+                    
                 <input type="text" v-model="search">
                 <button @click='filterGoods'>Sort</button>
-                <button>Cart</button>
+                <custom-button @open='openCart'>Корзина</custom-button>
+               
             </div>
         </div>
-        <div class="body">
+        <div :class="classes">
         
           <goods-item v-for="item in filteredGoods" :item="item">
 
           </goods-item>
+          
        </div>
+      
+       
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
