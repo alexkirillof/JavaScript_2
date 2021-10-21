@@ -7,14 +7,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
     <title>Интернет-магазин</title>
+   
+    
 </head>
 <body>
-    <header class="container">
-        <button class="btn-cart" type="button">КОРЗИНА</button>
-    </header>
-    <section class="section-one container">
-        <div class="products"></div>
-    </section>
+    <div id ="app"> 
+        <basket-card v-if="basketCardVision" text-header="New Header">
+            <close-button @close='closeCart'></close-button>
+            <template v-slot:header>
+                <div>КОРЗИНА</div>
+            </template>
+            <template v-slot:footer>
+                <div>FOOTER</div>
+            </template>
+            
+            <basket-goods-item v-for="item in goods" :item="item"></basket-goods-item>
+        </basket-card>
+        <div class="header">
+            <div @click='classes'>Computer shop</div>
+            
+                <div class="right-container">
+                    
+                <input type="text" v-model="search">
+                <button @click='filterGoods'>Sort</button>
+                <custom-button @open='openCart'>Корзина</custom-button>
+               
+            </div>
+        </div>
+        <div :class="classes">
+        
+          <goods-item v-for="item in filteredGoods" :item="item">
+
+          </goods-item>
+          
+       </div>
+      
+       
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
