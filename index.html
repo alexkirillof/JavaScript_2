@@ -21,7 +21,7 @@
                 <div>FOOTER</div>
             </template>
             
-            <basket-goods-item v-for="item in goods" :item="item"></basket-goods-item>
+            <basket-goods-item v-for="item in basketGoods" :item="item"  @del="delGood"></basket-goods-item>
         </basket-card>
         <div class="header">
             <div @click='classes'>Computer shop</div>
@@ -36,7 +36,7 @@
         </div>
         <div :class="classes">
         
-          <goods-item v-for="item in filteredGoods" :item="item">
+          <goods-item v-for="item in filteredGoods" :item="item" @click="addGood">
 
           </goods-item>
           
